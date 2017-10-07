@@ -1,33 +1,3 @@
-window.addEventListener('cloudkitloaded', function() {
-  console.log("cloudkitloaded");
-  
-  CloudKit.configure({
-    containers: [{
-      containerIdentifier: 'iCloud.com.coherent.staX',
-      
-      apiTokenAuth: {
-        // And generate a web token through CloudKit Dashboard.
-        apiToken: 'cabcc1115c6b118f192e08e7b1ca3dee05976f4b164f8047f59a1a53974ca46b',
-        persist: true, // Sets a cookie.
-        signInButton: {
-          id: 'apple-sign-in-button',
-          theme: 'black' // Other options: 'white', 'white-with-outline'.
-        },
-        signOutButton: {
-          id: 'apple-sign-out-button',
-          theme: 'black'
-        }
-      },
-
-      environment: "development",
-
-      zone: "default"
-
-    }]
-  });
-  
-});
-
 let CloudKit, container, publicDB, privateDB, sharedDB; 
 
 function onLoad (callback) {
@@ -39,7 +9,7 @@ function onLoad (callback) {
           
           apiTokenAuth: {
             // And generate a web token through CloudKit Dashboard.
-            apiToken: 'cabcc1115c6b118f192e08e7b1ca3dee05976f4b164f8047f59a1a53974ca46b',
+            apiToken: '',//API TOKEN HERE,
             persist: true, // Sets a cookie.
             signInButton: {
               id: 'apple-sign-in-button',
@@ -61,8 +31,8 @@ function onLoad (callback) {
 
     container = CloudKit.getDefaultContainer();
     publicDB = container.publicCloudDatabase;
-    //privateDB
-    //sharedDB
+    //privateDB TBD
+    //sharedDB TBD
 
     resolve(callback());
   });
