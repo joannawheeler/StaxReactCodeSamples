@@ -29,6 +29,7 @@ class App extends Component {
   }
 
   compnentDidMount () {
+    console.log("using load");
     CK.load().then(() => {
       CK.authenticate().then((userInfo) => {
         if (userInfo !== null) {

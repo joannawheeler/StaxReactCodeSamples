@@ -3,8 +3,10 @@ let CloudKit, container, publicDB, privateDB, sharedDB;
 //LOAD MUST BE CALLED BEFORE ANY OTHER METHODS
 //SHOULD BE CALLED DURING INSTATIATEION OF APP COMPONENT
 function load () {
+  console.log("trying to load");
   return new Promise ((resolve, reject) => {
     window.addEventListener('cloudkitloaded', function() {
+      console.log("loaded");
       CloudKit.configure({
         containers: [{
           containerIdentifier: 'iCloud.com.coherent.staX',
