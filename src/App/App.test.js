@@ -17,8 +17,6 @@ describe("App", () => {
   });
 
   it('should by default render and Auth component', () => {
-    console.log('length', wrapper.find(Auth));
-    console.log('length', wrapper.find(Auth).length)
     expect(wrapper.find(Auth).length).toBe(1);
   });
 
