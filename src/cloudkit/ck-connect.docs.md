@@ -30,4 +30,4 @@ This module handles the interface between the web-browser and our Cloudkit conta
 
 * Organizational Settings
   * It updates organizational settings
-  * It watches for changes in organization settings
+  * It listens for changes in organization settings

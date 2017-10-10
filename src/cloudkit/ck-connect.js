@@ -1,6 +1,8 @@
 let CloudKit, container, publicDB, privateDB, sharedDB; 
 
-function onLoad (callback) {
+//LOAD MUST BE CALLED BEFORE ANY OTHER METHODS
+//SHOULD BE CALLED DURING INSTATIATEION OF APP COMPONENT
+function load () {
   return new Promise ((resolve, reject) => {
     window.addEventListener('cloudkitloaded', function() {
       CloudKit.configure({
@@ -34,11 +36,13 @@ function onLoad (callback) {
     //privateDB TBD
     //sharedDB TBD
 
-    resolve(callback());
+    resolve();
   });
 }
 
-function isAuthenticated () {
+//AUTHENTICATE MUST BE CALLED NEXT, TO CREATE THE PROPER SIGNIN/OUT BUTTONS
+//ALSO CALL FROM APP COMPONENT, THE REST SHOULD BE CALLED FROM CHILD COMPONENTS 
+function authenticate () {
   return new Promise ((resolve, reject) => {
     container.setUpAuth().then((userInfo) => {
       //resolve userInfo
@@ -52,18 +56,20 @@ function isAuthenticated () {
   });
 }
 
-function onLogin (callback) {
+//BELONGS IN AUTH COMPONENT
+function onLogin () {
   return new Promise ((resolve, reject) => {
     container.whenUserSignsIn().then((userInfo) => {
-      resolve(callback(userInfo));
+      resolve(userInfo);
     }).catch((err) => {reject(err);});
   });
 }
 
-function onLogout (callback) {
+//BELONGS IN MAIN COMPONENT
+function onLogout () {
   return new Promise ((resolve, reject) => {
     container.whenUserSignsOut().then((_) => {
-      resolve(callback(_));
+      resolve(_);
     }).catch((err) => {reject(err);});
   });
 }
@@ -159,7 +165,7 @@ function clearWatch (watchID) {
 }
 
 export default {
-  onLoad, isAuthenticated, onLogin, onLogout,
+  load, authenticate, onLogin, onLogout,
   getFacilityList, getFacility, createFacility, updateFacility, removeFacility,
   createItem, updateItem, updateItem, updatePlaceable,
   updateUserPreferences, updateOrganizationPreferences
