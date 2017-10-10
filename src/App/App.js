@@ -2,7 +2,10 @@
 import React, { Component } from 'react';
 import './App.css';
 
-//children
+//CloudKit
+import CK from '../cloudkit/ck-connect.js';
+
+//Children
 import Auth from '../Auth/Auth.js';
 import Main from '../Main/Main.js';
 
@@ -12,13 +15,39 @@ class App extends Component {
     this.state = {
       user: null,
     }
+
+    this.sign_in = this.sign_in.bind(this);
+    this.sign_out = this.sign_out.bind(this);
+  }
+
+  sign_in (userInfo) {
+    this.setState({user: userInfo});
+  }
+
+  sign_out (_) {
+    this.setState({user: null});
+  }
+
+  compnentDidMount () {
+    CK.load().then(() => {
+      CK.authenticate().then((userInfo) => {
+        if (userInfo !== null) {
+          this.sign_in(userInfo);
+        }
+      });
+    })
   }
 
   render () {
     if (this.state.user === null) {
-      return (<Auth />);
+      return (<Auth
+        sign_in={this.sign_in}
+      />);
     } else {
-      return (<Main />);
+      return (<Main
+        sign_out={this.sign_out}
+        user={this.state.user}
+      />);
     }
   }
 }
