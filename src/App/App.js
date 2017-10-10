@@ -34,7 +34,7 @@ class App extends Component {
         if (userInfo !== null) {
           this.sign_in(userInfo);
         }
-      });
+      }).catch(() => {console.warn("Please Log into iCloud.")});
     })
   }
 
