@@ -8,7 +8,9 @@ class Main extends Component {
   }
 
   render () {
-    return null;
+    return (<div className="Main">
+      <div id="apple-sign-out-button"></div>
+    </div>);
   }
 }
 
