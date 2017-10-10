@@ -35,7 +35,7 @@ class App extends Component {
           this.sign_in(userInfo);
         }
       }).catch(() => {console.warn("Please Log into iCloud.")});
-    })
+    }).catch(() => {console.error("Could Not Load Cloudkit.")});
   }
 
   render () {
