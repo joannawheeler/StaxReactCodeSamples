@@ -167,7 +167,7 @@ function clearWatch (watchID) {
 export default {
   load, authenticate, onLogin, onLogout,
   getFacilityList, getFacility, createFacility, updateFacility, removeFacility,
-  createItem, updateItem, updateItem, updatePlaceable,
-  updateUserPreferences, updateOrganizationPreferences
-  watchFacility, clearWatch,
+  getFleet, createItem, updateItem, removeItem, updatePlaceable,
+  updateUserPreferences, updateOrganizationSettings,
+  watchFacility, watchOrganizationSettings, clearWatch,
 }
