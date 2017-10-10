@@ -1,6 +1,6 @@
 # Desktop_Stax
-Browser based Stax app
-
+Browser based Stax app  
+More info in the Wiki
 ---
 
 ## Setup
