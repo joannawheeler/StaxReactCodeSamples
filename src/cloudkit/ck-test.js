@@ -7,5 +7,6 @@ import CK from "./ck-connect.js";
   in a browser.
 */
 
+console.info("Test suite is running.");
 //TODO...
 

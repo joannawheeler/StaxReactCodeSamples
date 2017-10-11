@@ -13,6 +13,7 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
+      loaded: false,
       user: null,
     }
 
@@ -28,17 +29,28 @@ class App extends Component {
     this.setState({user: null});
   }
 
-  compnentDidMount () {
+  componentDidMount () {
     CK.load().then(() => {
+      this.setState({loaded: true});
       CK.authenticate().then((userInfo) => {
         if (userInfo !== null) {
           this.sign_in(userInfo);
         }
-      }).catch(() => {console.warn("Please Log into iCloud.")});
-    })
+      });
+      CK.onLogin().then((userInfo) => {
+        this.sign_in(userInfo);
+      });
+      CK.onLogout().then((_) => {
+        this.sign_out(_);
+      });
+    }).catch((e) => {console.error("Could Not Load Cloudkit\n", e)});
   }
 
   render () {
+    if (!this.state.loaded) {
+      //TODO: Make this a spinner.
+      return null; 
+    }
     if (this.state.user === null) {
       return (<Auth
         sign_in={this.sign_in}
