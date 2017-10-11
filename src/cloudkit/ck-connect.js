@@ -1,17 +1,26 @@
-let CloudKit, container, publicDB, privateDB, sharedDB; 
+import CLOUDKIT_API_KEY from './key.js'
+/*global CloudKit*/
 
+let container, publicDB, privateDB, sharedDB; 
 //LOAD MUST BE CALLED BEFORE ANY OTHER METHODS
 //SHOULD BE CALLED DURING INSTATIATEION OF APP COMPONENT
 function load () {
   return new Promise ((resolve, reject) => {
-    window.addEventListener('cloudkitloaded', function() {
+
+    if (window.CloudKit === undefined) {
+      window.addEventListener('cloudkitloaded', configureContainer);
+    } else {
+      configureContainer();
+    }
+
+    function configureContainer () {
       CloudKit.configure({
         containers: [{
           containerIdentifier: 'iCloud.com.coherent.staX',
           
           apiTokenAuth: {
             // And generate a web token through CloudKit Dashboard.
-            apiToken: '',//API TOKEN HERE,
+            apiToken: CLOUDKIT_API_KEY,//API TOKEN HERE,
             persist: true, // Sets a cookie.
             signInButton: {
               id: 'apple-sign-in-button',
@@ -29,14 +38,14 @@ function load () {
 
         }]
       });
-    });
 
-    container = CloudKit.getDefaultContainer();
-    publicDB = container.publicCloudDatabase;
-    //privateDB TBD
-    //sharedDB TBD
+      container = CloudKit.getDefaultContainer();
+      publicDB = container.publicCloudDatabase;
+      //privateDB TBD
+      //sharedDB TBD
 
-    resolve();
+      resolve();
+    };
   });
 }
 
@@ -45,18 +54,12 @@ function load () {
 function authenticate () {
   return new Promise ((resolve, reject) => {
     container.setUpAuth().then((userInfo) => {
-      //resolve userInfo
-      //reject null
-      if (userInfo) {
-        resolve(userInfo);
-      } else {
-        reject(userInfo);
-      }
+      //resolve both userInfo and null
+      resolve(userInfo);
     }).catch((err) => {reject(err);});
   });
 }
 
-//BELONGS IN AUTH COMPONENT
 function onLogin () {
   return new Promise ((resolve, reject) => {
     container.whenUserSignsIn().then((userInfo) => {
@@ -65,7 +68,6 @@ function onLogin () {
   });
 }
 
-//BELONGS IN MAIN COMPONENT
 function onLogout () {
   return new Promise ((resolve, reject) => {
     container.whenUserSignsOut().then((_) => {
