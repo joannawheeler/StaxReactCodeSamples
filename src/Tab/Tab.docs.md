@@ -65,39 +65,39 @@ A container for the side menu of a tab.
 [
   { 
     type: "option",
-    value: "Create New",
+    mainValue: "Create New",
     id: "123",
   }, {
     type: "Label",
-    value: "Favorites",
+    mainValue: "Favorites",
     children: [
       {
         type: "option",
-        value: "Click Me!",
-        subValue "Airbus-100",
+        mainValue: "Click Me!",
+        subValue: "Airbus-100",
         id: "456",
       },{
         type: "option",
-        value: "Shiny New Plane",
-        subValue "Boeing-747",
+        mainValue: "Shiny New Plane",
+        subValue: "Boeing-747",
         tags: ["first out"]
         id: "789",
       }
     ]
   }, {
     type: "dropdown",
-    value: "Hangar1",
+    mainValue: "Hangar1",
     children: [
       {
         type: "option",
-        value: "ABCDEF123",
-        subValue "Cessna-150",
+        mainValue: "ABCDEF123",
+        subValue: "Cessna-150",
         tags: ["short-term", "Jeff"]
         id: "ABC",
       },{
         type: "option",
-        value: "ZXYW321",
-        subValue "Boeing-747",
+        mainValue: "ZXYW321",
+        subValue: "Boeing-747",
         tags: ["huge", "maintenance"]
         id: "ZXY",
       }

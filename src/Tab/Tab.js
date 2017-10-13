@@ -60,8 +60,8 @@ export class TabMenuOption extends Component {
 }
 TabMenuOption.propTypes = {
   selectOption: PropTypes.func.isRequired,
-  id: PropTypes.string.PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  value: PropTypes.string.isRequired,
+  optionID: PropTypes.string.PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  mainValue: PropTypes.string.isRequired,
   subValue: PropTypes.string,
 };
 
@@ -76,6 +76,7 @@ export class TabMenuDropdown extends Component {
   }
 }
 TabMenuDropdown.propTypes = {
+  mainValue: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.element),
 };
 
@@ -90,6 +91,7 @@ export class TabMenuLabel extends Component {
   }
 }
 TabMenuLabel.propTypes = {
+  mainValue: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.element),
 };
 
