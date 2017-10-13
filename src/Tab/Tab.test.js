@@ -70,7 +70,7 @@ describe("Tab Components", () => {
     it('takes a tree of options and creates react components.', () => {
       expect(wrapper.find(TabMenuOption).length).toBe(5);
       expect(wrapper.find(TabMenuDropdown).length).toBe(1);
-      expect(wrapper.find(TabMenuLabel).length).toBe(1));
+      expect(wrapper.find(TabMenuLabel).length).toBe(1);
     });
 
     it('passes a clickHandler to each of its TabMenuOption components.', () => {
