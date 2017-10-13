@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Tab.css';
 
+import PropTypes from 'prop-types';
+
 export class Tab extends Component {
   constructor (props) {
     super(props);
@@ -11,6 +13,10 @@ export class Tab extends Component {
     return null;
   }
 }
+Tab.propTypes = {
+  name: PropTypes.string.isRequired,
+  children: proptypes.arrayOf(PropTypes.element),
+};
 
 export class TabMarker extends Component {
   constructor (props) {
@@ -22,6 +28,9 @@ export class TabMarker extends Component {
     return null;
   }
 }
+TabMarker.propTypes = {
+  name: PropTypes.string.isRequired,
+};
 
 export class TabMenu extends Component {
   constructor (props) {
@@ -33,6 +42,11 @@ export class TabMenu extends Component {
     return null;
   }
 }
+TabMenu.propTypes = {
+  menuOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectOption: PropTypes.func.isRequired,
+  includeSearch: PropTypes.bool,  //default to true
+};
 
 export class TabMenuOption extends Component {
   constructor (props) {
@@ -44,6 +58,12 @@ export class TabMenuOption extends Component {
     return null;
   }
 }
+TabMenuOption.propTypes = {
+  selectOption: PropTypes.func.isRequired,
+  optionID: PropTypes.string.PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  mainValue: PropTypes.string.isRequired,
+  subValue: PropTypes.string,
+};
 
 export class TabMenuDropdown extends Component {
   constructor (props) {
@@ -55,6 +75,10 @@ export class TabMenuDropdown extends Component {
     return null;
   }
 }
+TabMenuDropdown.propTypes = {
+  mainValue: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.element),
+};
 
 export class TabMenuLabel extends Component {
   constructor (props) {
@@ -66,6 +90,10 @@ export class TabMenuLabel extends Component {
     return null;
   }
 }
+TabMenuLabel.propTypes = {
+  mainValue: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.element),
+};
 
 export class TabMenuSearch extends Component {
   constructor (props) {
@@ -77,6 +105,9 @@ export class TabMenuSearch extends Component {
     return null;
   }
 }
+TabMenuSearch.propTypes = {
+  filterOptions: PropTypes.func.isRequired,
+};
 
 export class TabHeader extends Component {
   constructor (props) {
