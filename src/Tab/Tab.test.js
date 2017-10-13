@@ -1,5 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { mount, shallow } from "enzyme";
+import sinon from 'sinon';
+
 import {
   //core
   Tab, TabMarker, TabMain,
@@ -14,126 +16,220 @@ import {
 describe("Tab Components", () => {
 
   describe("Tab", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<Tab />, div);
+    it('renders without crashing.', () => {
+      mount(<Tab />);
     });
 
     /* More Tests Coming*/
   });  
 
   describe("TabMarker", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabMarker />, div);
+    it('renders without crashing.', () => {
+      mount(<TabMarker />);
     });
 
     /* More Tests Coming*/
   }); 
 
   describe("TabMain", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabMain />, div);
+    it('renders without crashing.', () => {
+      mount(<TabMain />);
     });
 
     /* More Tests Coming*/
   }); 
 
   describe("TabMenu", () => {
+    let testOptions = [
+      {type: "option",mainValue: "Create New",id: "123",},
+      {type: "Label",mainValue: "Favorites",children: [
+        {type: "option",mainValue: "Click Me!",subValue: "Airbus-100",id: "456",},
+        {type: "option",mainValue: "Shiny New Plane",subValue: "Boeing-747",tags: ["first out"], id: "789",}
+      ]}, 
+      {type: "dropdown",mainValue: "Hangar1",children: [
+        {type: "option",mainValue: "ABCDEF123",subValue: "Cessna-150",tags: ["short-term", "Jeff"],id: "ABC",},
+        {type: "option",mainValue: "ZXYW321",subValue: "Boeing-747",tags: ["huge", "maintenance"],id: "ZXY",}
+      ]}
+    ];
+    let clickHandler = sinon.spy();
+
+    let wrapper;
     it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabMenu />, div);
+      wrapper = mount(<TabMenu
+        menuOptions={testOptions}
+        selectOption={clickHandler}
+      />);
     });
 
-    /* More Tests Coming*/
+    it('takes a tree of options and creates react components.', () => {
+      expect(wrapper.find(TabMenuOption).length).toBe(5);
+      expect(wrapper.find(TabMenuDropdown).length).toBe(1);
+      expect(wrapper.find(TabMenuLabel).length).toBe(1);
+    });
+
+    it('takes a tree of options and creates react components.', () => {
+      expect(wrapper.find(TabMenuOption).length).toBe(5);
+      expect(wrapper.find(TabMenuDropdown).length).toBe(1);
+      expect(wrapper.find(TabMenuLabel).length).toBe(1));
+    });
+
+    it('passes a clickHandler to each of its TabMenuOption components.', () => {
+      wrapper.find(TabMenuOption)[0].simulate("click");
+      expect(clickHandler.callCount).toBe(1);
+    });
+
+    it('renders a TabMenuSearch (by default).', () => {
+      expect(wrapper.find(TabMenuSearch).length).toBe(1);
+      wrapper.setProps({includeSearch: false});
+      expect(wrapper.find(TabMenuSearch).length).toBe(0);
+    });
   }); 
 
   describe("TabMenuOption", () => {
+    let testOption = {type: "option",mainValue: "Shiny New Plane",subValue: "Boeing-747",tags: ["first out"], id: "789",}
+    let clickHandler = sinon.spy();
+    let testID = testOption.id;
+
+    let wrapper;
     it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabMenuOption />, div);
+      wrapper = mount(<TabMenuOption 
+        selectOption={clickHandler}
+        optionID={testID}
+        mainValue={testOption.mainValue}
+      />);
     });
 
-    /* More Tests Coming*/
+    it('invokes a passed in function with its unique ID as an argument.', () => {
+      wrapper.simulate("click");
+      expect(clickHandler.calledWith(testID)).toBe(true);
+    });
+
+    it('creates 1 span for its main value, and a second span for its sub value, if needed.', () => {
+      expect(wrapper.find('span').length).toBe(1);
+      wrapper.setProps({subValue: testOption.subValue});
+      expect(wrapper.find('span').length).toBe(2);
+    });
   }); 
 
   describe("TabMenuDropdown", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabMenuDropdown />, div);
+
+    let wrapper;
+    it('renders without crashing.', () => {
+      wrapper = mount(<TabMenuDropdown>
+        <TabMenuOption 
+          selectOption={()=>{}}
+          optionID={1}
+          mainValue={"A"}
+        />
+        <TabMenuOption 
+          selectOption={()=>{}}
+          optionID={2}
+          mainValue={"B"}
+        />
+        <TabMenuOption 
+          selectOption={()=>{}}
+          optionID={3}
+          mainValue={"C"}
+        />
+      </TabMenuDropdown>);
     });
 
-    /* More Tests Coming*/
+    it('is folded up by default.', () => {
+      expect(wrapper.find(TabMenuOption).length).toBe(0);
+    });
+
+    it('shows its children after being clicked.', () => {
+      wrapper.simulate("click");
+      expect(wrapper.find(TabMenuOption).length).toBe(3);
+    });
+
+    it('hides its children after being clicked again.', () => {
+      wrapper.simulate("click");
+      expect(wrapper.find(TabMenuOption).length).toBe(0);
+    });
+
   }); 
 
   describe("TabMenuLabel", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabMenuLabel />, div);
+    
+    let wrapper;
+    it('renders without crashing.', () => {
+      wrapper = mount(<TabMenuLabel>
+        <TabMenuOption 
+          selectOption={()=>{}}
+          optionID={1}
+          mainValue={"A"}
+        />
+        <TabMenuOption 
+          selectOption={()=>{}}
+          optionID={2}
+          mainValue={"B"}
+        />
+        <TabMenuOption 
+          selectOption={()=>{}}
+          optionID={3}
+          mainValue={"C"}
+        />
+      </TabMenuLabel>);
     });
 
-    /* More Tests Coming*/
+    it('always shows its children.', () => {
+      expect(wrapper.find(TabMenuOption).length).toBe(3);
+    });
+
   }); 
 
   describe("TabMenuSearch", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabMenuSearch />, div);
+    it('renders without crashing.', () => {
+      mount(<TabMenuSearch />);
     });
 
     /* More Tests Coming*/
   }); 
 
   describe("TabHeader", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabHeader />, div);
+    it('renders without crashing.', () => {
+      mount(<TabHeader />);
     });
 
     /* More Tests Coming*/
   }); 
 
   describe("TabHeaderButton", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabHeaderButton />, div);
+    it('renders without crashing.', () => {
+      mount(<TabHeaderButton />);
     });
 
     /* More Tests Coming*/
   }); 
 
   describe("TabFooter", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabFooter />, div);
+    it('renders without crashing.', () => {
+      mount(<TabFooter />);
     });
 
     /* More Tests Coming*/
   }); 
 
   describe("TabFooterButton", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabFooterButton />, div);
+    it('renders without crashing.', () => {
+      mount(<TabFooterButton />);
     });
 
     /* More Tests Coming*/
   }); 
 
   describe("TabForm", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabForm />, div);
+    it('renders without crashing.', () => {
+      mount(<TabForm />);
     });
 
     /* More Tests Coming*/
   }); 
 
   describe("TabFormField", () => {
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<TabFormField />, div);
+    it('renders without crashing.', () => {
+      mount(<TabFormField />);
     });
 
     /* More Tests Coming*/
