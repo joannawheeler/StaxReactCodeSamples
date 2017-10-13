@@ -20,5 +20,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#keys
+# processed css
+/src/**/*.css
+
+# keys
 /src/cloudkit/key.js
