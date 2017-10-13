@@ -10,7 +10,12 @@ The top level container for a tab.
 
 #### Functionality
 * It holds its children elements.
-* It has a specific background color for the tab it belongs to.
+* Because its useful state relies on ajax requests, it should render with a 'loading' indicator by default.
+
+#### Styling
+* It has a specific background color for the feature it belongs to.
+* It should take up about 90% of the page width (from whatever side its marker originated).
+* It should take up 100% of the page height (including a small vertial margin).
 
 ## `TabMarker`
 
@@ -30,8 +35,8 @@ The large part of the tab where the main feature of the tab is displayed.
 * (Specific to each tab)
 
 #### Styling
-* It takes up about 3/4 of the entire tab (including margin/padding), on the righthand side.
-* Combined with a `TabHeader` and `TabFooter` it should  fill out 100% of the tab (including margin/padding).
+* It takes up about 3/4 of the entire tab width (including margin/padding), on the righthand side.
+* Combined with a `TabHeader` and `TabFooter` it should  fill out 100% of the tab height (including margin/padding).
 
 # Menu
 
@@ -45,8 +50,8 @@ A container for the side menu of a tab.
 * It adds a search bar above its child elements.
 
 #### Styling
-* It takes up about 1/4 of the entire tab (including margin/padding), on the lefthand side.
-* It should have a fixed height and fill out 100% of the tab (including margin/padding).
+* It takes up about 1/4 of the entire tab width (including margin/padding), on the lefthand side.
+* It should have a fixed height and fill out 100% of the tab height (including margin/padding).
 * Its children should appear in one column, out the same width.
 * Its overflow should be scrollable, and not extend the height of the `Tab`.
 * `TabMenuOptions`s, `TabMenuDropDown`s, and `TabMenuDropLabels`s should be flush.
@@ -61,6 +66,7 @@ A container for the side menu of a tab.
   { 
     type: "option",
     value: "Create New",
+    id: "123",
   }, {
     type: "Label",
     value: "Favorites",
@@ -69,11 +75,13 @@ A container for the side menu of a tab.
         type: "option",
         value: "Click Me!",
         subValue "Airbus-100",
+        id: "456",
       },{
         type: "option",
         value: "Shiny New Plane",
         subValue "Boeing-747",
         tags: ["first out"]
+        id: "789",
       }
     ]
   }, {
@@ -85,11 +93,13 @@ A container for the side menu of a tab.
         value: "ABCDEF123",
         subValue "Cessna-150",
         tags: ["short-term", "Jeff"]
+        id: "ABC",
       },{
         type: "option",
         value: "ZXYW321",
         subValue "Boeing-747",
         tags: ["huge", "maintenance"]
+        id: "ZXY",
       }
     ]
   }
@@ -99,6 +109,7 @@ A container for the side menu of a tab.
 * Create components with it.
 * When filtering out children to render (ie: from searching), it does not display `TabLabel`s or `TabDropdown`s without children.
 * Note that options can also have "tags" which will not be displayed but are factored in while searching.
+* The `TabMenu` takes 'onclick' propertery that expects an option's 'id' passed in as an argument.
 
 ## `TabMenuOption`
 
@@ -106,7 +117,7 @@ A container for the side menu of a tab.
 A clickable option on a tab menu.
 
 #### Functionality
-* It has a accepts a clickhandler (that should affect the state of the `Tab` somehow).
+* It has a accepts a clickhandler (passed down from the `Tab`) that expects the options unique 'id' as an argument.
 * It has a 'value' property that will be diplayed.
 * It can also have a 'subValue' property that will be diplayed, but in a smaller font.
 
@@ -117,7 +128,7 @@ A clickable option on a tab menu.
 ## `TabMenuDropdown`
 
 #### Summary
-A dropdown list of `TabMenuOptions`.
+A dropdown list of `TabMenuOption`s.
 
 #### Functionality
 * It holds its child compnents.
