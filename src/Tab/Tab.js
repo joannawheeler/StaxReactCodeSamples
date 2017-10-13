@@ -15,7 +15,7 @@ export class Tab extends Component {
 }
 Tab.propTypes = {
   name: PropTypes.string.isRequired,
-  children: proptypes.arrayOf(PropTypes.element),
+  children: PropTypes.arrayOf(PropTypes.element),
 };
 
 export class TabMarker extends Component {
@@ -60,7 +60,7 @@ export class TabMenuOption extends Component {
 }
 TabMenuOption.propTypes = {
   selectOption: PropTypes.func.isRequired,
-  optionID: PropTypes.string.PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  optionID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   mainValue: PropTypes.string.isRequired,
   subValue: PropTypes.string,
 };
