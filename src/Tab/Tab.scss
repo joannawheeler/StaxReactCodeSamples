@@ -1,0 +1,56 @@
+/*****************************
+*
+* Color Pallete
+*
+*****************************/
+
+$AircraftColor: brown;
+$FacilitiesColor: blue;
+$FleetColor: red;
+$ObstaclesColor: orange;
+$OptionsColor: purple;
+$ReportsColor: pink;
+$UtilitiesColor: purple;
+
+/*****************************
+*
+* Tab and TabMarker
+*
+*****************************/
+
+
+
+$tabWidth: 90%;
+
+$tabMarkerWidth;
+
+.TabLeft {
+  left: 0;
+  width: $TabWidth;
+}
+
+.TabMarkerLeft {
+  left: 0;
+}
+
+.TabMarkerLeft.open {
+  left: 90%
+}
+
+.TabRight {
+  right: 0;
+}
+
+.TabMarkerRight {
+
+}
+
+.TabMarkerRight.open {
+
+}
+
+/*****************************
+*
+* TabMenu and children
+*
+*****************************/
