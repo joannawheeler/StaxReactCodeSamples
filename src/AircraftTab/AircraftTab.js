@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './AircraftTab.css';
 
+import {Tab} from '../Tab/Tab.js';
+
 class AircraftTab extends Component {
   constructor (props) {
     super(props);
@@ -8,7 +10,7 @@ class AircraftTab extends Component {
   }
 
   render () {
-    return null;
+    return <Tab name="Aircraft"/>
   }
 }
 
