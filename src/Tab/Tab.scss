@@ -94,15 +94,24 @@ $lightenBy: 8%;
     background-color: lighten($UtilitiesTabColor, $lightenBy);
   }
 }
-$tabWidth: 90%;
+$tabWidth: 95%;
+$tabHeight: 100%;
 $tabMarkerWidth: 40px;
 $tabMarkerHeight: 120px;
 $tabMarkerMargin: 0;
+$transitionDuration: .4s;
 
 .Tab {
   position: absolute;
+  height: $tabHeight;
   width: $tabWidth;
+  //width: 0; //start at 0 to do animation
+  //transition: width $transitionDuration;
 }
+
+// .Tab.open {
+//   width: $tabWidth;
+// }
 
 .Tab.left {
   left: 0;
@@ -135,12 +144,14 @@ $tabMarkerMargin: 0;
   left: 0;
   transform: rotate(90deg);
   transform-origin: left $tabMarkerWidth;
+  transition: left $transitionDuration;
 }
 
 .TabMarker.right {
   right: 0;
   transform: rotate(-90deg);
   transform-origin: right $tabMarkerWidth;
+  transition: right $transitionDuration;
 }
 
 .TabMarker.sequence0 {

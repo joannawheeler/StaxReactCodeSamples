@@ -10,7 +10,7 @@ class AircraftTab extends Component {
   }
 
   render () {
-    return <Tab name="Aircraft"/>
+    return null;
   }
 }
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-bootstrap'; 
 
 import './Tab.css';
 
@@ -8,19 +7,27 @@ import PropTypes from 'prop-types';
 export class Tab extends Component {
   constructor (props) {
     super(props);
-
   }
 
   render () {
-    return (<Modal>
-      <Modal.Body>This is a Tab</Modal.Body>
-    </Modal>);
+    let id = this.props.name+"Tab";
+    let className = "Tab "+
+      this.props.name+" "+
+      this.props.alignment+" ";
+    return (<div
+      id={id}
+      className={className}
+      >{this.props.children}</div>
+    );
   }
 }
 Tab.propTypes = {
   name: PropTypes.string.isRequired,
-  children: PropTypes.arrayOf(PropTypes.element),
-  alignment: PropTypes.string,
+  alignment: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
 };
 
 export class TabMarker extends Component {
@@ -39,9 +46,10 @@ export class TabMarker extends Component {
 
     return (<div
       id={id}
-      className={className}>
-      {this.props.name}
-    </div>);
+      className={className}
+      onClick={this.props.onClick}
+      >{this.props.name}</div>
+    );
   }
 }
 TabMarker.propTypes = {
@@ -49,6 +57,7 @@ TabMarker.propTypes = {
   alignment: PropTypes.string, //default "left"
   sequence: PropTypes.number, //default 0
   open: PropTypes.bool, //default false
+  onClick: PropTypes.func.isRequired,
 };
 
 export class TabMenu extends Component {
