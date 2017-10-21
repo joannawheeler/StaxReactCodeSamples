@@ -32,6 +32,9 @@ class App extends Component {
   componentDidMount () {
     CK.load().then(() => {
       this.setState({loaded: true});
+      //remove the spinner
+      if (document && document.getElementById("spinner")) {document.getElementById("spinner").classList.remove("spinning");}
+      document.getElementById("")
       CK.authenticate().then((userInfo) => {
         if (userInfo !== null) {
           this.sign_in(userInfo);
