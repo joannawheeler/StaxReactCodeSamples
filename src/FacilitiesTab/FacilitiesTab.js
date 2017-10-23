@@ -9,6 +9,7 @@ class FacilitiesTab extends Component {
 
   render () {
     return null;
+    //<Tab name="Facilities" children=[array of elements] />
   }
 }
 
