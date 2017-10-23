@@ -47,12 +47,6 @@ export class TabMarker extends Component {
   }
 
   render () {
-<<<<<<< HEAD
-    return null;
-    //if user clicks (this.state.props.name} and it = Facilities
-      //return <Facilities />
-    //  ...etc
-=======
     let id = this.props.name+"TabMarker";
     let className = "TabMarker "+
       this.props.name+" "+
@@ -66,7 +60,6 @@ export class TabMarker extends Component {
       onClick={this.props.onClick}
       >{this.props.name}</div>
     );
->>>>>>> e21940b5f6f5f5f6f8012c4ad983971ac321f004
   }
 }
 TabMarker.propTypes = {

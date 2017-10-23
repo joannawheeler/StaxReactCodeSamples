@@ -28,7 +28,7 @@ class Main extends Component {
   }
 
   open (name) {
-    return ()=>{this.setState({activeTab: name});}    
+    return ()=>{this.setState({activeTab: name});}
   }
 
   close () {
@@ -50,19 +50,6 @@ class Main extends Component {
   }
 
   render () {
-<<<<<<< HEAD
-    return (
-      <div className="Main">
-        <div id="apple-sign-in-button"></div>
-        <div id="apple-sign-out-button"></div>
-        main
-        <Tab name="some name" children={[ <div>element1</div>, <div>element2</div>, <div>element3</div> ]} />
-      </div>);
-
-    //<TabMarker name="Facilities" />
-    //<TabMarker name="Fleet" />
-    // ...etc
-=======
     let content;
     if (this.state.activeTab) {
       let activeTab = TABS[this.state.activeTab];
@@ -94,7 +81,6 @@ class Main extends Component {
       </div>
       {content}
     </div>);
->>>>>>> e21940b5f6f5f5f6f8012c4ad983971ac321f004
   }
 }
 
