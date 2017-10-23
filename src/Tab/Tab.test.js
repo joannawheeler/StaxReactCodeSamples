@@ -17,7 +17,7 @@ describe("Tab Components", () => {
 
   describe("Tab", () => {
     it('renders without crashing.', () => {
-      mount(<Tab />);
+      mount(<Tab name="something"/>);
     });
 
     /* More Tests Coming*/
@@ -25,7 +25,7 @@ describe("Tab Components", () => {
 
   describe("TabMarker", () => {
     it('renders without crashing.', () => {
-      mount(<TabMarker />);
+      mount(<TabMarker name="something"/>);
     });
 
     /* More Tests Coming*/
@@ -181,7 +181,7 @@ describe("Tab Components", () => {
 
   describe("TabMenuSearch", () => {
     it('renders without crashing.', () => {
-      mount(<TabMenuSearch />);
+      mount(<TabMenuSearch filterOptions={sinon.spy()}/>);
     });
 
     /* More Tests Coming*/

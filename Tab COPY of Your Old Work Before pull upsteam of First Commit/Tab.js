@@ -7,6 +7,82 @@ import PropTypes from 'prop-types';
 export class Tab extends Component {
   constructor (props) {
     super(props);
+<<<<<<< HEAD
+    this.state = {
+      menuOptions: [
+            {
+              type: "option",
+              mainValue: "Create New",
+              // subValue: "remove this subValue",
+              id: "123",
+            },
+
+
+            {
+              type: "Label",
+              mainValue: "Favorites",
+              children: [
+                {
+                  type: "option",
+                  mainValue: "Click Me!",
+                  subValue: "Airbus-100",
+                  id: "456",
+                },{
+                  type: "option",
+                  mainValue: "Shiny New Plane",
+                  subValue: "Boeing-747",
+                  tags: ["first out"],
+                  id: "789",
+                }
+              ]
+            },
+
+            {
+              type: "dropdown",
+              mainValue: "Hangar1",
+              children: [
+                {
+                  type: "option",
+                  mainValue: "ABCDEF123",
+                  subValue: "Cessna-150",
+                  tags: ["short-term", "Jeff"],
+                  id: "ABC",
+                },{
+                  type: "option",
+                  mainValue: "ZXYW321",
+                  subValue: "Boeing-747",
+                  tags: ["huge", "maintenance"],
+                  id: "ZXY",
+                }
+              ]
+            }
+          ]
+    }
+
+    this.selectOption = this.selectOption.bind(this);
+  }
+
+
+  selectOption(id) {
+    //function to select the options
+    alert("hi!");
+  }
+
+  render () {
+    return (
+      //<TabHeader />
+      <div>
+      TAB
+      <TabMenu selectOption={this.selectOption} menuOptions={this.state.menuOptions} />
+      </div>
+
+        //<TabMain />
+        //<TabFooter />
+
+
+
+      )
+=======
   }
 
   render () {
@@ -19,6 +95,7 @@ export class Tab extends Component {
       className={className}
       >{this.props.children}</div>
     );
+>>>>>>> e21940b5f6f5f5f6f8012c4ad983971ac321f004
   }
 }
 

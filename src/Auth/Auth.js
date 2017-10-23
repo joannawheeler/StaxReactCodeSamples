@@ -20,8 +20,10 @@ class Auth extends Component {
 
   render () {
     return (<div className="Auth">
-      <div id="apple-sign-in-button"></div>
-      <div id="apple-sign-out-button"></div>
+      <div className="apple-buttons auth">
+        <div id="apple-sign-in-button"></div>
+        <div id="apple-sign-out-button"></div>
+      </div>
     </div>);
   }
 }
