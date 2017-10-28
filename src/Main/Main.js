@@ -3,7 +3,7 @@ import './Main.css';
 
 //CloudKit
 import CK from '../cloudkit/ck-connect.js';
-import {Tab} from '../Tab/Tab.js'
+// import {Tab} from '../Tab/Tab.js'
 
 //Helper Components
 import {Tab, TabMarker} from '../Tab/Tab.js';
@@ -74,13 +74,15 @@ class Main extends Component {
     } else {
       content = this.allMarkers();
     }
-    return (<div className="Main">
-      <div className="apple-buttons main">
-        <div id="apple-sign-in-button"></div>
-        <div id="apple-sign-out-button"></div>
+    return (
+      <div className="Main">
+        <div className="apple-buttons main">
+          <div id="apple-sign-in-button"></div>
+          <div id="apple-sign-out-button"></div>
+        </div>
+        {content}
       </div>
-      {content}
-    </div>);
+    )
   }
 }
 

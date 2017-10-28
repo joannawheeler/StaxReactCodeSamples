@@ -89,7 +89,7 @@ export class TabMenu extends Component {
     var listOfOptions = [];
     for (var i=0; i < array.length; i++) {
       if (array[i].type === "option") {
-        listOfOptions.push(<TabMenuOption selectOption={this.props.selectOption} optionID={array[i].id} mainValue={array[i].mainValue} subValue={array[i].subValue} />)
+        listOfOptions.push(<TabMenuOption selectOption={this.props.selectOption} optionID={array[i].id} mainValue={array[i].mainValue} subValue={array[i].subValue} key={i} />)
       } else if (array[i].type === "Label") {
           // var labelAndLabelsOptions = <TabMenuLabel />
           // for(var j=0; j < array[i].children.length) {
@@ -97,7 +97,12 @@ export class TabMenu extends Component {
           //   return <TabMenuOption />
           //   }
           // }
-       listOfOptions.push(<TabMenuLabel mainValue={array[i].mainValue} children={array[i].children}  iterateThruOptions={this.iterateThruOptions} selectOption={this.selectOption} />)
+        var labelChildren =[];
+        for (var j=0; j < array[i].children.length; j++) {
+          labelChildren.push(<TabMenuOption selectOption={this.props.selectOption} optionID={array[i].children[j].id} mainValue={array[i].children[j].mainValue} subValue={array[i].children[j].subValue} key={j} />)
+        }
+
+       listOfOptions.push(<TabMenuLabel mainValue={array[i].mainValue} selectOption={this.props.selectOption} key={i} >{labelChildren}</TabMenuLabel>)
         // for(var j=0; j < array[i][j].length) {
         //   if (array[i][j].type === "option") {
         //     return <TabMenuOption />
@@ -105,19 +110,25 @@ export class TabMenu extends Component {
         // }
       } else if (array[i].type === 'dropdown') {
         // return "found a dropdown"
-        listOfOptions.push(<TabMenuDropdown mainValue={array[i].mainValue} children={array[i].children} />)
+        var dropdownChildren =[];
+        for (var j=0; j < array[i].children.length; j++) {
+          dropdownChildren.push(<TabMenuOption selectOption={this.props.selectOption} optionID={array[i].children[j].id} mainValue={array[i].children[j].mainValue} subValue={array[i].children[j].subValue} key={j} />)
+        }
+        listOfOptions.push(<TabMenuDropdown mainValue={array[i].mainValue} selectOption={this.props.selectOption} iterateThruOptions={this.iterateThruOptions} key={i}>{dropdownChildren}</TabMenuDropdown>)
       }
     }
-    return listOfOptions
+    return listOfOptions;
   }
 
   render () {
     return (
-        <div className="container-fluid">
-          {this.iterateThruOptions(this.props.menuOptions).map(function(menuOption){
-            return menuOption;
-          })}
+        <div>
+          {this.iterateThruOptions(this.props.menuOptions)}
         </div>
+          // {this.iterateThruOptions(this.props.menuOptions).map(function(menuOption){
+          //   return menuOption;
+          // })}
+        // </div>
 
       //iterate through the menuOptions array's objects
         //if the object.type = "option"
@@ -174,11 +185,9 @@ export class TabMenuOption extends Component {
   render () {
     return (
       <div onClick={this.props.selectOption}>
-        <div className='row'>
-          <div className='col-lg-2' className="optionStandInColor">
-              <span>{this.props.mainValue}</span>
-              {this.displaySubValue(this.props.subValue)}
-          </div>
+        <div>
+            <span>{this.props.mainValue}</span>
+            {this.displaySubValue(this.props.subValue)}
         </div>
       </div>
       )
@@ -209,94 +218,70 @@ export class TabMenuDropdown extends Component {
       hideChildren : true
     }
 
-  this.sayHi = this.sayHi.bind(this);
-  this.displayChildren = this.displayChildren.bind(this);
   this.toggleHidden = this.toggleHidden.bind(this);
-  }
+  this.showChildren = this.showChildren.bind(this);
 
-  sayHi() {
-    alert("Hi")
   }
-
-  displayChildren(children) {
-    var listOfChildren = [];
-    for (var i = 0; i < children.length; i++) {
-      listOfChildren.push(<TabMenuOption selectOption={this.props.children[i].selectOption} optionId={this.props.children[i].id} mainValue={this.props.children[i].mainValue} subValue={this.props.children[i].subValue} />)
-    }
-    console.log(listOfChildren)
-    return listOfChildren;
-  }
-
-  // hideOrUnhideChildren() {
-  //   this.displayChildren(this.props.children).map(function(dropdownOption){
-  //     return dropdownOption;
-  //   })
-  // }
 
 toggleHidden() {
-  // console.log(this.state.hideChildren)
   this.setState({
     hideChildren : !this.state.hideChildren
   })
   console.log()
 }
 
+showChildren() {
+  if (!this.state.hideChildren && this.props.children) {
+    return this.props.children
+  }
+}
+
+
+
   render () {
     return (
-    <div>
-      <div className='row'>
-        <div className='col-lg-2'>
-          <div onClick={this.toggleHidden}>{this.props.mainValue}
-          </div>
-            <div>
-            {!this.state.hideChildren && this.displayChildren(this.props.children).map(function(menuOption){
-                return menuOption;
-              })
-            }
-            </div>
-        </div>
+      <div>
+          <div onClick={this.toggleHidden}>{this.props.mainValue}</div>
+          <div>{this.props.children}</div>
       </div>
-    </div>
     )
   }
 }
+
 TabMenuDropdown.propTypes = {
   mainValue: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.element),
   selectOption: PropTypes.func.isRequired,
 };
 
+
+
+
+
 export class TabMenuLabel extends Component {
   constructor (props) {
     super(props);
-
-    this.displayChildren = this.displayChildren.bind(this);
-  }
-
-  displayChildren(children) {
-    var listOfChildren = [];
-    for (var i = 0; i < children.length; i++) {
-      listOfChildren.push(<TabMenuOption selectOption={this.props.children[i].selectOption} optionId={this.props.children[i].id} mainValue={this.props.children[i].mainValue} subValue={this.props.children[i].subValue} />)
-    }
-    console.log(listOfChildren)
-    return listOfChildren;
   }
 
   render () {
     return (
-      <div className='row'>
-        <div className='col-lg-2'>
-            <div onClick={this.props.selectOption}>{this.props.mainValue}</div>
-        </div>
+      <div>
+        <div>{this.props.mainValue}</div>
+        <div>{this.props.children}</div>
       </div>
     )
   }
 }
+
 TabMenuLabel.propTypes = {
   mainValue: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.element),
   selectOption: PropTypes.func.isRequired,
 };
+
+
+
+
 
 export class TabMenuSearch extends Component {
   constructor (props) {
