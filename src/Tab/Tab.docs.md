@@ -1,6 +1,6 @@
 
 
-Written by John Knox:
+//Written by John Knox:
 
 # Summary
 The components in the `Tab` folder are used as helpers in each of the tabs to create uniform styling.
