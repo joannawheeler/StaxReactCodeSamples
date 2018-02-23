@@ -1,43 +1,20 @@
+
+//Tests written by John Knox
+
+// Testing of TabMenu, TabMenuOption, TabMenuDropdown, and TabMenuLabel done by Joanna Wheeler
+
 import React from 'react';
 import { mount, shallow } from "enzyme";
 import sinon from 'sinon';
 
 import {
   //core
-  Tab, TabMarker, TabMain,
+  Tab,
   //menu
-  TabMenu, TabMenuOption, TabMenuDropdown, TabMenuLabel, TabMenuSearch,
-  //header/footer
-  TabHeader, TabHeaderButton, TabFooter, TabFooterButton,
-  //forms
-  TabForm, TabFormField
+  TabMenu, TabMenuOption, TabMenuDropdown, TabMenuLabel
 } from './Tab';
 
 describe("Tab Components", () => {
-
-  describe("Tab", () => {
-    it('renders without crashing.', () => {
-      mount(<Tab name="something"/>);
-    });
-
-    /* More Tests Coming*/
-  });
-
-  describe("TabMarker", () => {
-    it('renders without crashing.', () => {
-      mount(<TabMarker name="something"/>);
-    });
-
-    /* More Tests Coming*/
-  });
-
-  describe("TabMain", () => {
-    it('renders without crashing.', () => {
-      mount(<TabMain />);
-    });
-
-    /* More Tests Coming*/
-  });
 
   describe("TabMenu", () => {
     let testOptions = [
@@ -179,59 +156,4 @@ describe("Tab Components", () => {
 
   });
 
-  describe("TabMenuSearch", () => {
-    it('renders without crashing.', () => {
-      mount(<TabMenuSearch filterOptions={sinon.spy()}/>);
-    });
-
-    /* More Tests Coming*/
-  });
-
-  describe("TabHeader", () => {
-    it('renders without crashing.', () => {
-      mount(<TabHeader />);
-    });
-
-    /* More Tests Coming*/
-  });
-
-  describe("TabHeaderButton", () => {
-    it('renders without crashing.', () => {
-      mount(<TabHeaderButton />);
-    });
-
-    /* More Tests Coming*/
-  });
-
-  describe("TabFooter", () => {
-    it('renders without crashing.', () => {
-      mount(<TabFooter />);
-    });
-
-    /* More Tests Coming*/
-  });
-
-  describe("TabFooterButton", () => {
-    it('renders without crashing.', () => {
-      mount(<TabFooterButton />);
-    });
-
-    /* More Tests Coming*/
-  });
-
-  describe("TabForm", () => {
-    it('renders without crashing.', () => {
-      mount(<TabForm />);
-    });
-
-    /* More Tests Coming*/
-  });
-
-  describe("TabFormField", () => {
-    it('renders without crashing.', () => {
-      mount(<TabFormField />);
-    });
-
-    /* More Tests Coming*/
-  });
-});
+};

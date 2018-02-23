@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './AircraftTab.css';
-
 import {Tab, TabMenu} from '../Tab/Tab.js';
 
 class AircraftTab extends Component {
@@ -22,7 +20,6 @@ class AircraftTab extends Component {
     }
 
   this.selectOption = this.selectOption.bind(this);
-
   }
 
   selectOption() {
@@ -32,7 +29,7 @@ class AircraftTab extends Component {
   render () {
     return  (
       <div className="row">
-       <div className="col-4-sm">________</div>
+       <div className="col-4-sm">Test</div>
         <TabMenu className="col-6-sm blue" menuOptions={this.state.menuOptions} selectOption={this.selectOption} includeSearch={true}  />
       </div>
     )

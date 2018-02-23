@@ -1,3 +1,7 @@
+
+
+Written by John Knox:
+
 # Summary
 The components in the `Tab` folder are used as helpers in each of the tabs to create uniform styling.
 
@@ -163,69 +167,3 @@ A label for a section of options on a menu.
 #### Styling
 * Dark Background, light text color.
 * Slightly lighter color on hover.
-
-## `TabMenuSearch`
-
-#### Summary
-A search box to filter out options in larger `TabMenu`s.
-
-#### Functionality
-* As the user types, the displayed `TabMenuOptions` are filtered.
-
-#### Styling
-* Input element, with light background and dark text.
-* Distiguished from of elements by:
-  * Not quite flush with other tab menu child components.
-  * Slight border radius.
-
-# Header/Footer
-
-## `TabHeader`
-
-#### Summary
-The area above `TabMain`.
-
-#### Functionality
-* It holds `TabHeaderButton`s as children.
-
-## `TabHeaderButton`
-
-#### Summary
-A button style for `TabHeader`.
-
-#### Functionality
-* It does something...
-
-## `TabFooter`
-
-#### Summary
-The Area below `TabMain`.
-
-#### Functionality
-* It does something...
-
-## `TabFooterButton`
-
-#### Summary
-A button style for `TabFooter`.
-
-#### Functionality
-* It does something...
-
-# Forms
-
-## `TabForm`
-
-#### Summary
-A style for forms inside of tabs.
-
-#### Functionality
-* It does something...
-
-## `TabFormField`
-
-#### Summary
-A style for form fields inside of tabs.
-
-#### Functionality
-* It does something...
